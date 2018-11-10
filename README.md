@@ -155,6 +155,8 @@ def crossover(parent1, parent2):
 
 # Fitness-функция
 
+Оценка тура имеет вид: 913.82
+
 ```
 def fitness(individual):
 	
@@ -172,11 +174,7 @@ def fitness(individual):
 	for i in range(0, len(individual)-1):
 		app.append( distMatrix[individual[i]][individual[i+1]] )
 	app.append( distMatrix[-1][individual[0]] )
-	
-	
-	cost*=100000000
-	cost+=np.max( np.abs( np.diff(app) )) #макс. разница длин путей
-	 
+
 	return cost
 ```
 
