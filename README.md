@@ -167,14 +167,6 @@ def fitness(individual):
 		cost += distMatrix[individual[i]][individual[i+1]]
 	cost += distMatrix[len(individual)-1][0]
 	
-  
-	#вторичный критерий отбора
-	#во множестве равновесных решений, преимущество будет у решения с наименьшей максимальной разницей длин путей
-	app=[]
-	for i in range(0, len(individual)-1):
-		app.append( distMatrix[individual[i]][individual[i+1]] )
-	app.append( distMatrix[-1][individual[0]] )
-
 	return cost
 ```
 
