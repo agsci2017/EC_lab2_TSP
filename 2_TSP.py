@@ -14,9 +14,9 @@ def individual():
 	random.shuffle(lst)
 	
 	#стабильный первый элемент - улучшает результат
-	pos = lst.index(50)
-	elt = lst.pop(pos)
-	lst.insert(0,elt)
+	#pos = lst.index(50)
+	#elt = lst.pop(pos)
+	#lst.insert(0,elt)
 	
 	return lst
 
