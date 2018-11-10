@@ -51,6 +51,7 @@ way = [11, 4, 10, 9, 3, 2, 8, 7, 1, 6, 12, 5, 13, 18, 14, 15, 16, 17, 25, 26, 27
 			col2 = individual[idx2:idx2+1]
 			individual[idx2:idx2+1] = col1
 			individual[idx1:idx1+1] = col2
+  #Оборачивание участка
 	elif seed==3:
 		#reverse part
 		idx1 = random.randint(0, len(individual)-2)
