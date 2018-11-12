@@ -56,12 +56,11 @@ def genetic_algorithm(individual, fitness, mutate, crossover, n_individuals=10, 
 
 		offspring = []
 		while len(offspring) < n_offspring:
-			male, female = random.randint(0, len(parents)-1), random.randint(0, len(parents)-1)
-			if male != female:
-				offspring.append(crossover(parents[male], parents[female]))
-				offspring.append(crossover(parents[0], parents[female]))
-				#~ offspring.append(crossover(parents[0], parents[male]))
-				#~ offspring.append(crossover(parents[1], parents[female]))
+			A, B = random.randint(0, len(parents)-1), random.randint(0, len(parents)-1)
+			if A != B:
+				offspring.append(crossover(parents[A], parents[B]))
+				offspring.append(crossover(parents[0], parents[A]))
+				offspring.append(crossover(parents[0], parents[B]))
 		
 		#можно сделать чтобы мутировали родители(parents), которые оставили потомство
 		#score будет меняться скачкообразно
