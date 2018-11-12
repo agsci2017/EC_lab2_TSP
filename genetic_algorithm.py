@@ -73,9 +73,9 @@ def genetic_algorithm(individual, fitness, mutate, crossover, n_individuals=10, 
 				parents[i] = mutate(parents[i])
 		
 		#~ if random.randint(0,1)==0:
-		for i in range(len(parents)):
-			if mutation_rate > random.random():
-				parents[i] = mutate(parents[i])
+		#for i in range(len(parents)):
+		#	if mutation_rate > random.random():
+		#		parents[i] = mutate(parents[i])
 
 		population = parents + offspring
 		
