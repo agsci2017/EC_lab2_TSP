@@ -27,20 +27,7 @@ def fitness(individual):
 	
 	for i in range(0, len(individual)-1):
 		cost += distMatrix[individual[i]][individual[i+1]]
-	cost += distMatrix[len(individual)-1][0]
-	
-	#вторичный критерий отбора
-	#в множестве равновесных решений, преимущество будет у решения с наименьшей максимальной разницей длин путей
-	app=[]
-	for i in range(0, len(individual)-1):
-		app.append( distMatrix[individual[i]][individual[i+1]] )
-	app.append( distMatrix[-1][individual[0]] )
-	
-	
-	#cost*=1000000
-	A = (int(round(np.max(np.abs(app)),0))//50)*50
-	cost+=(A*1000000)
-	#~ cost+=np.max( np.abs( np.diff(app) )) #макс. разница длин путей
+	cost += distMatrix[individual[-1]][individual[0]]
 	 
 	return cost
 
