@@ -15,7 +15,7 @@ def generate_individuals(func, n):
 
 import copy
 
-f = open("ch3.csv","w")
+#~ f = open("ch3.csv","w")
 
 def genetic_algorithm(individual, fitness, mutate, crossover, n_individuals=10, retain=6, epochs=10, mutation_rate=0.2):
 	
@@ -34,54 +34,65 @@ def genetic_algorithm(individual, fitness, mutate, crossover, n_individuals=10, 
 		#mutation_rate-=0.001
 		#print(mutation_rate)
 		#~ print(len(population))
-		
+		print(len(population), end=' | ')
 		population = sort_by_fitness(fitness, population)
+		population = population[:n_individuals]
+		
+		print(len(population))
+		
 		saving1 = copy.deepcopy(population[0])
 		saving2 = copy.deepcopy(population[1])
 		#~ saving3 = copy.deepcopy(population[2])
 		#~ print(len(population))
 		
-		print('Gen #{} Best: fitness ({}) individual ({})'.format(e, fitness(population[0]), population[0]))
-		f.write('{},{}\n'.format(e, fitness(population[0])))
-		f.flush()
+		print('Gen #{} Best: fitness ({}) individual ({})'.format(e, fitness(population[0])/1000.0, population[0]))
+		#~ f.write('{},{}\n'.format(e, fitness(population[0])))
+		#~ f.flush()
 
 		parents = population[:retain]
 		
 		#новые случайные особи могут иметь последовательность, которая может улучшить score
 		#поэтому, позволяем им участвовать в кросс-овере
-		for kk in range(0,30):
+		for kk in range(0,20):
 			parents.append(individual())
 
 		n_offspring = n_individuals - retain
 
 		offspring = []
-		while len(offspring) < n_offspring:
-			A, B = random.randint(0, len(parents)-1), random.randint(0, len(parents)-1)
-			if A != B:
-				offspring.append(crossover(parents[A], parents[B]))
-				offspring.append(crossover(parents[0], parents[A]))
-				offspring.append(crossover(parents[0], parents[B]))
-		
-		#можно сделать чтобы мутировали родители(parents), которые оставили потомство
-		#score будет меняться скачкообразно
+		#~ while len(offspring) < n_offspring:
+			#~ male, female = random.randint(0, len(parents)-1), random.randint(0, len(parents)-1)
+			#~ if male != female:
+				#~ offspring.append(crossover(parents[male], parents[female]))
 		
 		
+		for osob in range(1,10):
+			offspring.append(crossover(parents[0], parents[osob]))
+		#~ for osob in range(1,10):
+			#~ offspring.append(crossover(parents[0], parents[osob]))
+		for osob in range(2,10):
+			offspring.append(crossover(parents[1], parents[osob]))
+		#~ for osob in range(1,10):
+			#~ offspring.append(crossover(parents[1], parents[osob]))
+		for osob in range(3,10):
+			offspring.append(crossover(parents[2], parents[osob]))
+		for osob in range(5,10):
+			offspring.append(crossover(parents[4], parents[osob]))
 		
+
 		for i in range(len(parents)):
 			if mutation_rate > random.random():
 				parents[i] = mutate(parents[i])
+		if random.randint(0,1)==0:
+			for i in range(len(parents)):
+				if mutation_rate > random.random():
+					parents[i] = mutate(parents[i])
 		
-		#~ if random.randint(0,1)==0:
-		#for i in range(len(parents)):
-		#	if mutation_rate > random.random():
-		#		parents[i] = mutate(parents[i])
-
 		population = parents + offspring
 		
 		if saving1 not in population:
 			population.append(saving1)
-		if saving2 not in population:
-			population.append(saving2)
+		#~ if saving2 not in population:
+			#~ population.append(saving2)
 		#~ if saving3 not in population:
 			#~ population.append(saving3)
 

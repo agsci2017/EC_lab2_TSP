@@ -49,7 +49,7 @@ neg={}
 
 CNT=0
 
-fstat=open("stat.csv","w")
+#~ fstat=open("stat.csv","w")
 
 KEYS=[]
 
@@ -127,12 +127,10 @@ def mutate(individual):
 	
 	basis = copy.deepcopy(individual)
 	
-	#~ seed = random.choice([9,4,12,1])
 	
-	seed=random.randint(0,14)
-	#~ seed=random.choice([SEED1,SEED2])
+	seed=random.choice([SEED1,SEED2])
+	#~ seed=random.choice([17,7,SEED1])
 	
-	seed=random.choice([17,7,SEED1])
 	#shuffle part
 	if seed==17:
 		
