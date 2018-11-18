@@ -39,6 +39,7 @@ way = [8, 2, 3, 9, 10, 4, 11, 23, 38, 39, 40, 41, 42, 24, 43, 44, 61, 60, 59, 73
 # Эволюция
 
 Особенности:
+
 0. Лучшие родители оставляют больше потомков.
 ```
 		for osob in range(1,10):
@@ -67,6 +68,45 @@ saving1 = parents[:1]
 3. Родители мутируют после кросс-овера, вместе с потомками. 1 родитель не мутирует.
 
 # Мутации
+
+В результате FMS, было получено что мутация 3 производит наилучший результат. Но она имеет недостаток - один индекс всегда меньше другого (участок мутации мог находиться только в пределах/"середине" списка).
+
+Данная мутация была улучшена - добавлена возможность обработки ситуации, когда начальный индекс больше финального (оборот участка, включающего последние и начальные элементы списка, с исключением "середины").
+
+```
+def RR(a):
+	idx1=0
+	idx2=0
+	
+	while idx1==idx2:
+		idx1 = random.randint(0,len(a))
+		idx2 = random.randint(0,len(a))
+	
+	if idx1>idx2:
+		part1 = (a+a)[:idx1]
+		part2 = (a+a)[idx1:idx2+len(a)]
+		part3 = (a+a)[idx2+len(a):]
+		
+		part2=list(reversed(part2))
+		#~ print(part1,part2,part3)
+		#~ print(len(part1),len(part2),len(part3))
+		
+		#~ print("a:     ",a)
+		partA = (part1+part2)[:len(a)]
+		#~ print("partA: ",partA)
+		partB = (part1+part2)[len(a):]
+		#~ print("partB: ",partB)
+		partA[:len(partB)]=partB
+		#~ print("newA:  ",partA)
+		a=partA
+	
+	if idx1<idx2:
+		col = a[idx1:idx2]
+		col=list(reversed(col))
+		a[idx1:idx2]=col
+	
+	return copy.deepcopy(a)
+```
 
 ```
   #Перемещивание произвольно выбранной части
@@ -203,7 +243,7 @@ def crossover(parent1, parent2):
 
 # Fitness-функция
 
-Оценка тура имеет вид: 913.82
+Оценка тура имеет вид: 913820 (нужно поделить на 1000.0)
 
 ```
 def fitness(individual):
@@ -213,7 +253,7 @@ def fitness(individual):
 	
 	for i in range(0, len(individual)-1):
 		cost += distMatrix[individual[i]][individual[i+1]]
-	cost += distMatrix[len(individual)-1][0]
+	cost += distMatrix[individual[-1]][individual[0]]
 	
 	return cost
 ```
