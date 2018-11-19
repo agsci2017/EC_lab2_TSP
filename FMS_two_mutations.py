@@ -7,8 +7,8 @@ s = f.read()
 
 bash = open("best.sh","w")
 
-for i in range(0,15):
-	for j in range(0,15):
+for i in range(0,16):
+	for j in range(0,16):
 		
 		tmps=copy.deepcopy(s)
 		tmps=tmps.replace("SEED1",str(i))

@@ -22,7 +22,7 @@ def genetic_algorithm(individual, fitness, mutate, crossover, n_individuals=10, 
 	population = generate_individuals(individual, n_individuals)
 	
 	print(len(list(population)))
-	import pickle
+	#~ import pickle
 	#~ population = pickle.load( open( "population.p", "rb" ) )
 	
 	#~ population.append([11, 4, 10, 9, 3, 2, 8, 7, 1, 6, 12, 5, 13, 18, 14, 15, 16, 17, 25, 26, 27, 19, 20, 21, 22, 23, 24, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 46, 45, 53, 74, 68, 64, 54, 55, 47, 48, 49, 50, 51, 52, 57, 56, 62, 65, 69, 66, 70, 76, 71, 67, 63, 58, 59, 60, 61, 73, 72, 80, 79, 83, 84, 85, 86, 90, 91, 95, 96, 97, 104, 103, 111, 110, 99, 94, 92, 88, 87, 82, 81, 78, 75, 77, 89, 93, 98, 100, 105, 101, 102, 106, 107, 113, 108, 109, 115, 119, 116, 120, 117, 122, 129, 128, 127, 126, 125, 124, 121, 118, 114, 112, 123, 130, 131])
@@ -34,18 +34,18 @@ def genetic_algorithm(individual, fitness, mutate, crossover, n_individuals=10, 
 		#mutation_rate-=0.001
 		#print(mutation_rate)
 		#~ print(len(population))
-		print(len(population), end=' | ')
+		#~ print(len(population), end=' | ')
 		population = sort_by_fitness(fitness, population)
 		population = population[:n_individuals]
 		
-		print(len(population))
+		#~ print(len(population))
 		
 		saving1 = copy.deepcopy(population[0])
 		saving2 = copy.deepcopy(population[1])
 		#~ saving3 = copy.deepcopy(population[2])
 		#~ print(len(population))
 		
-		print('Gen #{} Best: fitness ({}) individual ({})'.format(e, fitness(population[0])/1000.0, population[0]))
+		print('Gen #{} Best: fitness ({}) individual ({})'.format(e, fitness(population[0]), population[0]))
 		#~ f.write('{},{}\n'.format(e, fitness(population[0])))
 		#~ f.flush()
 
@@ -65,6 +65,8 @@ def genetic_algorithm(individual, fitness, mutate, crossover, n_individuals=10, 
 				#~ offspring.append(crossover(parents[male], parents[female]))
 		
 		
+		for osob in range(1,10):
+			offspring.append(crossover(parents[0], parents[osob]))
 		for osob in range(1,10):
 			offspring.append(crossover(parents[0], parents[osob]))
 		#~ for osob in range(1,10):
@@ -95,7 +97,7 @@ def genetic_algorithm(individual, fitness, mutate, crossover, n_individuals=10, 
 			#~ population.append(saving2)
 		#~ if saving3 not in population:
 			#~ population.append(saving3)
-
+	return fitness(population[0])
 	
 
 	population = sort_by_fitness(fitness, population)

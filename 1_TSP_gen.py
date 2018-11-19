@@ -27,8 +27,7 @@ for i in cities:
 		#print(X1,X2,Y1,Y2)
 		dist = math.sqrt((X2-X1)*(X2-X1) + (Y2-Y1)*(Y2-Y1))
 		#~ print(dist)
-		Matrix[i][j]=int(round(dist*1000,3)) #плавающая точка может давать погрешности на арифметических операциях(+),
-		#вызывая некорректные сравнения 350.00000000 != 350.00000000
+		Matrix[i][j]=round(dist,3)
 
 print(Matrix[0])
 print(Matrix[-1])

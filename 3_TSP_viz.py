@@ -34,7 +34,7 @@ def fitness(individual):
 	#~ cost*=100000000
 	#~ cost+=np.max( np.abs(np.diff(app) )) #макс. разница длин путей
 	 
-	return cost/1000.0
+	return cost
 
 
 plt.title(fitness(way))

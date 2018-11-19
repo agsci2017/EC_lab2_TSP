@@ -159,11 +159,11 @@ def mutate(individual):
 	
 	basis = copy.deepcopy(individual)
 	
-	seed=random.choice([17,7])
+	seed=random.choice([15,7])
 
-	if seed==17:
+	if seed==15:
 		individual=RR(individual)
-	if seed==18:
+	if seed==16:
 		individual=RS(individual)
 		
 	if seed==0:
@@ -412,4 +412,4 @@ def crossover(parent1, parent2):
 
 	return child
 
-genetic_algorithm(individual, fitness, mutate, crossover, 125, 95, 8000, 0.5)
+genetic_algorithm(individual, fitness, mutate, crossover, 120, 95, 8000, 0.5)

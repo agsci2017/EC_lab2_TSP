@@ -123,18 +123,62 @@ def RR(a):
 	
 	return copy.deepcopy(a)
 
+#full shuffle
+def RS(a):
+	idx1=0
+	idx2=0
+	
+	while idx1==idx2 or abs(idx1-idx2)>15:
+		idx1 = random.randint(0,len(a))
+		idx2 = random.randint(0,len(a))
+	
+	if idx1>idx2:
+		#~ print(idx1,idx2)
+		#~ print(a+a)
+		part1 = (a+a)[:idx1]
+		part2 = (a+a)[idx1:idx2+len(a)]
+		part3 = (a+a)[idx2+len(a):]
+		#~ print(part1,part2,part3)
+		#~ print(len(part1),len(part2),len(part3))
+		
+		#~ part2=list(reversed(part2))
+		random.shuffle(part2)
+		#~ print(part1,part2,part3)
+		#~ print(len(part1),len(part2),len(part3))
+		
+		#~ print("a:     ",a)
+		partA = (part1+part2)[:len(a)]
+		#~ print("partA: ",partA)
+		partB = (part1+part2)[len(a):]
+		#~ print("partB: ",partB)
+		partA[:len(partB)]=partB
+		#~ print("newA:  ",partA)
+		a=partA
+	
+	if idx1<idx2:
+		col = a[idx1:idx2]
+		random.shuffle(col)
+		a[idx1:idx2]=col
+	
+	return copy.deepcopy(a)
+
 def mutate(individual):
 	
 	basis = copy.deepcopy(individual)
 	
 	
-	seed=random.choice([SEED1,SEED2])
-	#~ seed=random.choice([17,7,SEED1])
+	#~ seed=random.choice([SEED1,SEED2])
+	seed=random.choice([17,7,SEED1])
+	seed=random.choice([SEED1])
 	
 	#shuffle part
-	if seed==17:
+	if seed==15:
 		
 		individual=RR(individual)
+
+	if seed==16:
+		
+		individual=RS(individual)
 		
 	if seed==0:
 		
@@ -304,6 +348,9 @@ def mutate(individual):
 		
 		comp(individual, basis,"eject random-insert seq")
 		#~ 
+	elif seed==15:
+		#no mutation
+		pass
 	elif seed==11:
 		#~ 
 		#select random three, put them at selected place
@@ -392,9 +439,9 @@ def crossover(parent1, parent2):
 
 
 # 3-fold cross-validation :))
-bestfit1 = genetic_algorithm(individual, fitness, mutate, crossover, 250, 100, 4500, 0.5)
-bestfit2 = genetic_algorithm(individual, fitness, mutate, crossover, 250, 100, 4500, 0.5)
-bestfit3 = genetic_algorithm(individual, fitness, mutate, crossover, 250, 100, 4500, 0.5)
+bestfit1 = genetic_algorithm(individual, fitness, mutate, crossover, 125, 100, 3500, 0.5)
+bestfit2 = genetic_algorithm(individual, fitness, mutate, crossover, 125, 100, 3500, 0.5)
+bestfit3 = genetic_algorithm(individual, fitness, mutate, crossover, 125, 100, 3500, 0.5)
 
 avg = str((bestfit1+bestfit2+bestfit3)/3.0)
 

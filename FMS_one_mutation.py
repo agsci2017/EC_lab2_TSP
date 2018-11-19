@@ -7,7 +7,7 @@ s = f.read()
 
 bash = open("best.sh","w")
 
-for i in range(0,15):
+for i in range(0,17):
 		
 	tmps=copy.deepcopy(s)
 	tmps=tmps.replace("SEED1",str(i))
@@ -19,7 +19,7 @@ for i in range(0,15):
 	
 	bash.write("python3 TSP_seed_{}.py &\n".format(i))
 	
-	if (i+1)%5==0:
+	if (i+1)%6==0:
 		bash.write("wait\n")
 
 bash.write("wait\n")
